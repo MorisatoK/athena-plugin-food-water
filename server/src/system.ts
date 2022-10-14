@@ -1,10 +1,9 @@
 import * as alt from 'alt-server';
-import { PlayerEvents } from '../../../../server/events/playerEvents';
-import { VITAL_NAMES } from '../../shared/enums';
-import { ATHENA_EVENTS_PLAYER } from '../../../../shared/enums/athenaEvents';
-import { SYSTEM_EVENTS } from '../../../../shared/enums/system';
+import { Athena } from '@AthenaServer/api/athena';
+import { ATHENA_EVENTS_PLAYER } from '@AthenaShared/enums/athenaEvents';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { VITALS_CONFIG } from '../../shared/src/config';
-import { Athena } from '../../../../server/api/athena';
+import { VITAL_NAMES } from '../../shared/enums';
 
 const syncTimes: { [player_id: string]: number } = {};
 
@@ -49,7 +48,7 @@ export class VitalsSystem {
         alt.onClient(SYSTEM_EVENTS.PLAYER_TICK, InternalFunctions.handlePing);
 
         // This is called when the player selects a character
-        PlayerEvents.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, (player) => {
+        Athena.events.player.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, (player) => {
             VitalsSystem.forceUpdateVital(player, VITAL_NAMES.FOOD);
             VitalsSystem.forceUpdateVital(player, VITAL_NAMES.WATER);
         });

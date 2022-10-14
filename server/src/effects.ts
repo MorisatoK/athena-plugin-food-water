@@ -1,11 +1,10 @@
 import * as alt from 'alt-server';
-import EFFECT from '../../../../shared/enums/effects';
-import { ItemEffects } from '../../../../server/systems/itemEffects';
+import EFFECT from '@AthenaShared/enums/effects';
+import { Item } from '@AthenaShared/interfaces/item';
+import IAttachable from '@AthenaShared/interfaces/iAttachable';
+import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags';
+import { Athena } from '@AthenaServer/api/athena';
 import { VITAL_NAMES } from '../../shared/enums';
-import { Item } from '../../../../shared/interfaces/item';
-import IAttachable from '../../../../shared/interfaces/iAttachable';
-import { ANIMATION_FLAGS } from '../../../../shared/flags/animationFlags';
-import { Athena } from '../../../../server/api/athena';
 import { VitalsSystem } from './system';
 
 export class InternalFunctions {
@@ -68,7 +67,7 @@ export class VitalsEffects {
      * It adds an effect to the item that will change the player's vitals when the item is consumed.
      */
     static init() {
-        ItemEffects.add(EFFECT.EFFECT_FOOD, (player: alt.Player, item: Item) => {
+        Athena.systems.effects.add(EFFECT.EFFECT_FOOD, (player: alt.Player, item: Item) => {
             if (!item || !item.data || !item.data.amount) {
                 return;
             }
@@ -76,7 +75,7 @@ export class VitalsEffects {
             InternalFunctions.handleVitalsChange(player, item, VITAL_NAMES.FOOD);
         });
 
-        ItemEffects.add(EFFECT.EFFECT_WATER, (player: alt.Player, item: Item) => {
+        Athena.systems.effects.add(EFFECT.EFFECT_WATER, (player: alt.Player, item: Item) => {
             if (!item || !item.data || !item.data.amount) {
                 return;
             }

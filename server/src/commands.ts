@@ -1,10 +1,9 @@
 import * as alt from 'alt-server';
 import { VITAL_NAMES } from '../../shared/enums';
-import { PERMISSIONS } from '../../../../shared/flags/permissionFlags';
 import { VitalsSystem } from './system';
-import { command } from '../../../../server/decorators/commands';
-import { Athena } from '../../../../server/api/athena';
-import ChatController from '../../../../server/systems/chat';
+import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
+import { command } from '@AthenaServer/decorators/commands';
+import { Athena } from '@AthenaServer/api/athena';
 
 class VitalsCommands {
     @command('setfood', '/setfood [amount]', PERMISSIONS.ADMIN)
@@ -12,7 +11,7 @@ class VitalsCommands {
         let value = parseInt(commandValue);
 
         if (isNaN(value)) {
-            Athena.player.emit.message(player, ChatController.getDescription('setfood'));
+            Athena.player.emit.message(player, Athena.controllers.chat.getDescription('setfood'));
             return;
         }
 
@@ -25,7 +24,7 @@ class VitalsCommands {
         let value = parseInt(commandValue);
 
         if (isNaN(value)) {
-            Athena.player.emit.message(player, ChatController.getDescription('setwater'));
+            Athena.player.emit.message(player, Athena.controllers.chat.getDescription('setwater'));
             return;
         }
 
