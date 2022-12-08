@@ -24,8 +24,17 @@ export class InternalFunctions {
             Athena.player.emit.sound3D(player, item.data.sound, player);
         }
 
+        const prevAttachedObject = player.getLocalMeta('effectsProp') as IAttachable;
+
+        if (prevAttachedObject !== undefined) {
+            Athena.player.emit.objectRemove(player, prevAttachedObject.uid);
+        }
+
+        player.deleteLocalMeta('effectsProp');
+
         if (vitalsName === VITAL_NAMES.FOOD) {
             const attachedObject: IAttachable = {
+                uid: 'vital-effect-prop-prop_cs_burger_01',
                 model: 'prop_cs_burger_01',
                 bone: 57005,
                 pos: { x: 0.15, y: -0.02, z: -0.05 },
@@ -40,10 +49,12 @@ export class InternalFunctions {
                 ANIMATION_FLAGS.UPPERBODY_ONLY | ANIMATION_FLAGS.ENABLE_PLAYER_CONTROL,
                 6000,
             );
+            player.setLocalMeta('effectsProp', attachedObject);
         }
 
         if (vitalsName === VITAL_NAMES.WATER) {
             const attachedObject: IAttachable = {
+                uid: 'vital-effect-prop-prop_beer_bottle',
                 model: 'prop_beer_bottle',
                 bone: 57005,
                 pos: { x: 0.13, y: -0.12, z: -0.05 },
@@ -58,6 +69,7 @@ export class InternalFunctions {
                 ANIMATION_FLAGS.UPPERBODY_ONLY | ANIMATION_FLAGS.ENABLE_PLAYER_CONTROL,
                 5000,
             );
+            player.setLocalMeta('effectsProp', attachedObject);
         }
     }
 }
