@@ -6,6 +6,21 @@ import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags';
 import { Athena } from '@AthenaServer/api/athena';
 import { VITAL_NAMES } from '../../shared/enums';
 import { VitalsSystem } from './system';
+import { BONES } from '@AthenaShared/enums/bones';
+
+const defaultFoodAttachable: IAttachable = {
+    model: 'prop_sandwich_01',
+    bone: BONES.SKEL_R_Hand,
+    pos: { x: 0.15, y: -0.02, z: -0.05 },
+    rot: { x: -180, y: -150, z: -95 },
+};
+
+const defaultWaterAttachable: IAttachable = {
+    model: 'prop_ld_flow_bottle',
+    bone: BONES.SKEL_R_Hand,
+    pos: { x: 0.13, y: 0, z: -0.05 },
+    rot: { x: 100, y: -220, z: 180 },
+};
 
 export class InternalFunctions {
     /**
@@ -34,11 +49,11 @@ export class InternalFunctions {
 
         if (vitalsName === VITAL_NAMES.FOOD) {
             const attachedObject: IAttachable = {
-                uid: 'vital-effect-prop-prop_cs_burger_01',
-                model: 'prop_cs_burger_01',
-                bone: 57005,
-                pos: { x: 0.15, y: -0.02, z: -0.05 },
-                rot: { x: -180, y: -150, z: -95 },
+                uid: `vital-effect-prop-${defaultFoodAttachable.model}`,
+                model: defaultFoodAttachable.model,
+                bone: defaultFoodAttachable.bone,
+                pos: defaultFoodAttachable.pos,
+                rot: defaultFoodAttachable.rot,
             };
 
             Athena.player.emit.objectAttach(player, attachedObject, 6000);
@@ -54,11 +69,11 @@ export class InternalFunctions {
 
         if (vitalsName === VITAL_NAMES.WATER) {
             const attachedObject: IAttachable = {
-                uid: 'vital-effect-prop-prop_beer_bottle',
-                model: 'prop_beer_bottle',
-                bone: 57005,
-                pos: { x: 0.13, y: -0.12, z: -0.05 },
-                rot: { x: 100, y: -220, z: 180 },
+                uid: `vital-effect-prop-${defaultWaterAttachable.model}`,
+                model: defaultWaterAttachable.model,
+                bone: defaultWaterAttachable.bone,
+                pos: defaultWaterAttachable.pos,
+                rot: defaultWaterAttachable.rot,
             };
 
             Athena.player.emit.objectAttach(player, attachedObject, 5000);
