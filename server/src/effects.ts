@@ -49,11 +49,11 @@ export class InternalFunctions {
 
         if (vitalsName === VITAL_NAMES.FOOD) {
             const attachedObject: IAttachable = {
-                uid: `vital-effect-prop-${defaultFoodAttachable.model}`,
-                model: defaultFoodAttachable.model,
-                bone: defaultFoodAttachable.bone,
-                pos: defaultFoodAttachable.pos,
-                rot: defaultFoodAttachable.rot,
+                uid: `vital-effect-prop-${item.model ? item.model : defaultFoodAttachable.model}`,
+                model: item.model || defaultFoodAttachable.model,
+                bone: item.data.bone || defaultFoodAttachable.bone,
+                pos: item.data.pos || defaultFoodAttachable.pos,
+                rot: item.data.rot || defaultFoodAttachable.rot,
             };
 
             Athena.player.emit.objectAttach(player, attachedObject, 6000);
@@ -69,11 +69,11 @@ export class InternalFunctions {
 
         if (vitalsName === VITAL_NAMES.WATER) {
             const attachedObject: IAttachable = {
-                uid: `vital-effect-prop-${defaultWaterAttachable.model}`,
-                model: defaultWaterAttachable.model,
-                bone: defaultWaterAttachable.bone,
-                pos: defaultWaterAttachable.pos,
-                rot: defaultWaterAttachable.rot,
+                uid: `vital-effect-prop-${item.model ? item.model : defaultWaterAttachable.model}`,
+                model: item.model || defaultWaterAttachable.model,
+                bone: item.data.bone || defaultWaterAttachable.bone,
+                pos: item.data.pos || defaultWaterAttachable.pos,
+                rot: item.data.rot || defaultWaterAttachable.rot,
             };
 
             Athena.player.emit.objectAttach(player, attachedObject, 5000);
